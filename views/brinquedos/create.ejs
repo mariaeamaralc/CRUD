@@ -1,0 +1,9 @@
+<%- include('../partials/header') %>
+<h1>Novo Brinquedo</h1>
+<form action="/brinquedos/create" method="POST">
+  <input type="text" name="nome" placeholder="Nome" required>
+  <textarea name="descricao" placeholder="Descrição"></textarea>
+  <input type="number" step="0.01" name="preco" placeholder="Preço" required>
+  <button type="submit">Salvar</button>
+</form>
+<%- include('../partials/footer') %>

@@ -1,0 +1,15 @@
+<%- include('../partials/header') %>
+<h1>Brinquedos</h1>
+<a href="/brinquedos/create">Novo Brinquedo</a>
+<ul>
+  <% brinquedos.forEach(b => { %>
+    <li>
+      <%= b.nome %> - R$ <%= b.preco %>
+      <a href="/brinquedos/<%= b.id %>/edit">Editar</a>
+      <form action="/brinquedos/<%= b.id %>/delete" method="POST" style="display:inline;">
+        <button type="submit">Excluir</button>
+      </form>
+    </li>
+  <% }) %>
+</ul>
+<%- include('../partials/footer') %>
