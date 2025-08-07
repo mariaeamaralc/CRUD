@@ -2,6 +2,11 @@ const Brinquedo = require('../models/brinquedoModel');
 
 exports.list = (req, res) => {
     Brinquedo.getAll((err, brinquedos) => {
+        if (err) {
+            console.error('Erro ao buscar brinquedos:', err);
+            return res.status(500).send('Erro ao carregar brinquedos.');
+        }
+
         res.render('brinquedos/index', { brinquedos });
     });
 };
