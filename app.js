@@ -7,7 +7,7 @@ const userRoutes = require('./routes/userRoutes');
 const produtoRoutes = require('./routes/produtoRoutes');
 const categoriaRoutes = require('./routes/categoriaRoutes');
 const brinquedoRoutes = require('./routes/brinquedoRoutes');
-
+const sequelize = require('./config/sequelize');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -27,3 +27,6 @@ app.use('/brinquedos', brinquedoRoutes);
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+sequelize.authenticate()
+  .then(() => console.log('Conectado ao banco via Sequelize!'))
+  .catch(err => console.error('Erro conexão Sequelize:', err));

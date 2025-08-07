@@ -1,34 +1,21 @@
-const connection = require('../config/db');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/sequelize');
 
-exports.getAll = (callback) => {
-    connection.query('SELECT * FROM brinquedos', (err, results) => {
-        if (err) return callback(err);
-        callback(null, results);
-    });
-};
+const Brinquedo = sequelize.define('Brinquedo', {
+  nome: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  descricao: {
+    type: DataTypes.TEXT,
+  },
+  preco: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+  }
+}, {
+  tableName: 'brinquedos', // forçar o nome correto da tabela
+  timestamps: false        // desativa createdAt e updatedAt
+});
 
-exports.getById = (id, callback) => {
-    connection.query('SELECT * FROM brinquedos WHERE id = ?', [id], (err, results) => {
-        callback(err, results[0]);
-    });
-};
-
-exports.create = (data, callback) => {
-    connection.query(
-        'INSERT INTO brinquedos (nome, descricao, preco) VALUES (?, ?, ?)', 
-        [data.nome, data.descricao, data.preco], 
-        callback
-    );
-};
-
-exports.update = (id, data, callback) => {
-    connection.query(
-        'UPDATE brinquedos SET nome = ?, descricao = ?, preco = ? WHERE id = ?', 
-        [data.nome, data.descricao, data.preco, id], 
-        callback
-    );
-};
-
-exports.delete = (id, callback) => {
-    connection.query('DELETE FROM brinquedos WHERE id = ?', [id], callback);
-};
+module.exports = Brinquedo;
